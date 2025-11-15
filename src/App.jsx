@@ -4,22 +4,22 @@ import Login from "./components/Login.jsx";
 import Profile from "./components/Profile.jsx";
 import { Provider } from "react-redux";
 import { store } from "./utils/store.js";
+import Feed from "./components/Feed.jsx";
 
 function App() {
-
-
   return (
     <Provider store={store}>
       <BrowserRouter basename="/">
-        <Routes >
+        <Routes>
           <Route path="/" element={<Body />}>
+            <Route path="/" element={<Feed />}></Route>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/profile" element={<Profile />} ></Route>
+            <Route path="/profile" element={<Profile />}></Route>
           </Route>
-
         </Routes>
       </BrowserRouter>
-    </Provider>);
+    </Provider>
+  );
 }
 
 export default App;

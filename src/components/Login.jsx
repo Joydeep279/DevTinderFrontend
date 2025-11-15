@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 function Login() {
   const [email, setEmail] = useState("Babbage-@cs.us.edu");
@@ -12,13 +13,17 @@ function Login() {
 
   async function handleSubmit() {
     try {
-      const response = await axios.post("http://localhost:3000/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        BASE_URL + "/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
       dispatch(addUser(response.data));
-      navigate("/");
+      navigate("/feed");
     } catch (error) {
       throw new Error(error.message);
     }
@@ -26,7 +31,7 @@ function Login() {
 
   return (
     <form
-      className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto h-1/2clea"
+      className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto h-1/2"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
