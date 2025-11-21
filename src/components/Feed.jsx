@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 function Feed() {
   const [feedCardIndex, setFeedCardIndex] = useState(0);
-  const feedData = useSelector((store) => store.feed);
-  const userInfo = useSelector((store) => store.user.data);
+  const feedData = useSelector((store) => store?.feed);
+  const userInfo = useSelector((store) => store?.user?.data);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -62,7 +62,7 @@ function Navbar() {
           </svg>
         </label>
 
-        {userSlice.data ? (
+        {userSlice?.data ? (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}

@@ -7,9 +7,9 @@ import { addUser } from "../utils/userSlice";
 
 function Profile() {
   const { data } = useSelector((store) => store?.user);
-  const [firstName, setFirstName] = useState(data.firstName);
-  const [lastName, setLastName] = useState(data.lastName);
-  const [profileURL, setprofileURL] = useState(data.profileURL);
+  const [firstName, setFirstName] = useState(data?.firstName);
+  const [lastName, setLastName] = useState(data?.lastName);
+  const [profileURL, setprofileURL] = useState(data?.profileURL);
   const dispatch = useDispatch();
   async function handleSubmit() {
     try {
@@ -66,7 +66,10 @@ function Profile() {
         />
         <button className="btn btn-neutral mt-4">Save Profile</button>
       </form>
-      <FeedCard userData={{ firstName, lastName, profileURL }} />
+      <FeedCard
+        userData={{ firstName, lastName, profileURL }}
+        feedCard={{ setFeedCardIndex: null, feedCardIndex: null }}
+      />
     </div>
   );
 }

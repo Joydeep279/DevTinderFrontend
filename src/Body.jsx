@@ -9,7 +9,7 @@ import { addUser } from "./utils/userSlice";
 function Body() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user.data);
+  const user = useSelector((store) => store?.user?.data);
 
   const [isLoading, setIsLoading] = useState(true); // Track verification state
 
@@ -27,9 +27,7 @@ function Body() {
       dispatch(addUser(res.data));
     } catch (error) {
       // Only redirect to login if not already there
-      if (window.location.pathname !== "/login") {
-        navigate("/login");
-      }
+      navigate("/login");
     } finally {
       setIsLoading(false);
     }
