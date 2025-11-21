@@ -11,7 +11,7 @@ function FeedCard({ userData, feedCard }) {
   return (
     <div className="card bg-base-200 w-96 shadow-sm justify-center py-5">
       <figure>
-        <img src={profileURL} alt="profile" className="w-60 h-80 rounded" />
+        <img src={profileURL} alt="profile" className="w-60 h-80 rounded-2xl" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
