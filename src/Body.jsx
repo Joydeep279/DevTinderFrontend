@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "./utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "./utils/userSlice";
+import Footer from "./components/Footer";
 
 function Body() {
   const navigate = useNavigate();
@@ -50,7 +51,10 @@ function Body() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="h-[90dvh]">
+        <Outlet />
+      </div>
+      <Footer />
     </>
   );
 }

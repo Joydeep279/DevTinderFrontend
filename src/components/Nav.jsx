@@ -6,7 +6,7 @@ import { removeUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
 
 function Navbar() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "nord"); // Default theme
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "pastel"); // Default theme
   const dispatch = useDispatch();
   const userSlice = useSelector((store) => store.user);
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Navbar() {
             className="theme-controller"
             value={theme}
             onClick={() =>
-              handleThemeChange(theme === "nord" ? "dracula" : "nord")
+              handleThemeChange(theme === "pastel" ? "dracula" : "pastel")
             }
           />
 
@@ -81,11 +81,11 @@ function Navbar() {
               <li>
                 <Link to={"/profile"} className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  <span className="badge">{userSlice.data.firstName}</span>
                 </Link>
               </li>
               <li>
-                <Link to={"/setting"}>Settings</Link>
+                <Link to={"/connection"}>Connection</Link>
               </li>
               <li>
                 <button onClick={handleLogOut}>Logout</button>

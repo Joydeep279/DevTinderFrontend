@@ -10,9 +10,16 @@ function Profile() {
   const [firstName, setFirstName] = useState(data?.firstName);
   const [lastName, setLastName] = useState(data?.lastName);
   const [profileURL, setprofileURL] = useState(data?.profileURL);
+  const [toastStatus, setToastStatus] = useState(false);
+
   const dispatch = useDispatch();
+
   async function handleSubmit() {
     try {
+      setToastStatus(true);
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
       const updatedData = await axios.patch(
         BASE_URL + "/profile/edit",
         {
@@ -24,6 +31,7 @@ function Profile() {
           withCredentials: true,
         }
       );
+
       dispatch(addUser(updatedData.data.userData));
     } catch (error) {
       throw new Error("Oops something went wrong");
@@ -70,6 +78,13 @@ function Profile() {
         userData={{ firstName, lastName, profileURL }}
         feedCard={{ setFeedCardIndex: null, feedCardIndex: null }}
       />
+      {toastStatus && (
+        <div className="toast toast-top toast-center">
+          <div className="alert alert-success">
+            <span>Saved Successfully</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
