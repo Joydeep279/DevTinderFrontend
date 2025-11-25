@@ -9,7 +9,7 @@ function FeedCard({ userData, feedCard }) {
   }
 
   return (
-    <div className="card bg-base-200 w-96 shadow-sm justify-center m-5">
+    <div className="card bg-base-200 w-96 shadow-sm justify-center m-1">
       <figure>
         <img src={profileURL} alt="profile" className="w-60 h-80 rounded-2xl" />
       </figure>

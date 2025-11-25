@@ -51,9 +51,7 @@ function Body() {
   return (
     <>
       <Navbar />
-      <div className="h-[90dvh]">
-        <Outlet />
-      </div>
+      <Outlet />
       <Footer />
     </>
   );

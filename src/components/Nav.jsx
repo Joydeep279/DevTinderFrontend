@@ -85,6 +85,9 @@ function Navbar() {
                 </Link>
               </li>
               <li>
+                <Link to={"/requests"}>Request</Link>
+              </li>
+              <li>
                 <Link to={"/connection"}>Connection</Link>
               </li>
               <li>
