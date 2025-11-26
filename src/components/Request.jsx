@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { addToRequest } from "../utils/requestSlice";
 import { useDispatch, useSelector } from "react-redux";
+import ProfileList from "./ProfileList";
 
 const Request = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,11 @@ const Request = () => {
             Requests
           </li>
           {requestList.map((items) => (
-            <ProfileList items={items} options={["Ignore", "Interested"]} />
+            <ProfileList
+              items={items}
+              options={["Ignore", "Interested"]}
+              key={items._id}
+            />
           ))}
         </ul>
       )}

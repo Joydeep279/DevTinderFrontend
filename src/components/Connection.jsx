@@ -30,7 +30,11 @@ function Connection() {
           Connections
         </li>
         {connectionList.map((items) => (
-          <ProfileList items={items} options={["Remove", "Block"]} />
+          <ProfileList
+            items={items}
+            options={["Remove", "Block"]}
+            key={items._id}
+          />
         ))}
       </ul>
     </div>

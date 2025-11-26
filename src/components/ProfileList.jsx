@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileList = ({ items, options }) => {
   return (
-    <li className="list-row" key={items._id}>
+    <li className="list-row" >
       <div>
         <img className="size-10 rounded-box" src={items.profileURL} />
       </div>
