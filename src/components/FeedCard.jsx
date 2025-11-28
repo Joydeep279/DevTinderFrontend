@@ -1,11 +1,25 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+
 function FeedCard({ userData, feedCard }) {
-  const { firstName, lastName, profileURL } = userData;
+  const { firstName, lastName, profileURL, _id } = userData;
 
   let { setFeedCardIndex, feedCardIndex } = feedCard;
 
   function increamentCard() {
     const nextIndex = feedCardIndex + 1;
     setFeedCardIndex(nextIndex);
+  }
+
+  async function reviewRequest(status, id) {
+    await axios.post(
+      BASE_URL + "/request/" + status + "/" + id,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    increamentCard();
   }
 
   return (
@@ -16,9 +30,17 @@ function FeedCard({ userData, feedCard }) {
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
         {!(setFeedCardIndex || feedCardIndex) ? null : (
-          <div className="card-actions justify-end" onClick={increamentCard}>
-            <button className="btn btn-secondary">Ignore</button>
-            <button className="btn btn-primary">Interested</button>
+          <div className="card-actions justify-end">
+            <button
+              className="btn btn-secondary"
+              onClick={() => reviewRequest("ignored", _id)}>
+              Ignore
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => reviewRequest("interested", _id)}>
+              Interested
+            </button>
           </div>
         )}
       </div>

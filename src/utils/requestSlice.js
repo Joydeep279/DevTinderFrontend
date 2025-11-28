@@ -12,7 +12,7 @@ const requestSlice = createSlice({
     },
     removeRequest: (state, action) => {
       const id = action.payload;
-      return state.requests.filter((req) => req._id !== id);
+      return state.data.filter((req) => req._id !== id);
     },
   },
 });

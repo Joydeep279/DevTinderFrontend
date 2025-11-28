@@ -13,10 +13,6 @@ function Feed() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  if (feedCardIndex >= feedData?.length) {
-    setFeedCardIndex(0);
-  }
-
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
@@ -42,6 +38,11 @@ function Feed() {
   }, []);
 
   if (feedData === null) return <div>loading</div>;
+
+  if (feedData.length === 0) {
+    return <div>Out of Data</div>;
+  }
+
   return (
     <div className="flex justify-center">
       <FeedCard

@@ -49,11 +49,11 @@ function Body() {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-2.5 min-h-screen">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 

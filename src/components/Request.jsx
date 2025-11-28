@@ -26,7 +26,7 @@ const Request = () => {
 
   return (
     <div className="flex justify-center">
-      {!requestList.length ? (
+      {!requestList?.data?.length ? (
         <span className="p-4 pb-2 text-xs opacity-60 tracking-wide">
           No Request Found!
         </span>
@@ -35,7 +35,7 @@ const Request = () => {
           <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
             Requests
           </li>
-          {requestList.map((items) => (
+          {requestList?.data.map((items) => (
             <ProfileList
               items={items}
               options={["Ignore", "Interested"]}
