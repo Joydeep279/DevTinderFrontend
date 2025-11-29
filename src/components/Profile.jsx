@@ -72,7 +72,9 @@ function Profile() {
           value={profileURL}
           onChange={(e) => setprofileURL(e?.target?.value)}
         />
-        <button className="btn btn-neutral mt-4">Save Profile</button>
+        <button className="btn btn-neutral mt-4" onClick={() => handleSubmit()}>
+          Save Profile
+        </button>
       </form>
       <FeedCard
         userData={{ firstName, lastName, profileURL }}

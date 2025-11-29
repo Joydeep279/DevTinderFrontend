@@ -20,12 +20,10 @@ function Login() {
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user);
 
-  // 🔥 REDIRECT IF ALREADY LOGGED IN (correct useEffect)
   useEffect(() => {
     if (user?.data) navigate("/");
   }, [user, navigate]);
 
-  // 🔥 HANDLE LOGIN / SIGNUP FORM SUBMISSION
   async function handleSubmit() {
     try {
       let response;

@@ -6,13 +6,13 @@ import { removeRequest } from "../utils/requestSlice";
 const ProfileList = ({ items, options }) => {
   const dispatch = useDispatch();
   async function reviewConnection(status, id) {
-    // await axios.post(
-    //   BASE_URL + "/request/review/" + status + "/" + id,
-    //   {},
-    //   {
-    //     withCredentials: true,
-    //   }
-    // );
+    await axios.post(
+      BASE_URL + "/request/review/" + status + "/" + id,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(removeRequest(id));
   }
 

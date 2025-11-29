@@ -39,7 +39,7 @@ function Feed() {
 
   if (feedData === null) return <div>loading</div>;
 
-  if (feedData.length === 0) {
+  if (feedData.length === 0 || feedCardIndex >= feedData.length) {
     return <div>Out of Data</div>;
   }
 
