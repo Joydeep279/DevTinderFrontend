@@ -41,6 +41,9 @@ function FeedCard({ userData, feedCard }) {
               onClick={() => reviewRequest("interested", _id)}>
               Interested
             </button>
+            <button className="btn btn-soft" onClick={() => increamentCard()}>
+              Next
+            </button>
           </div>
         )}
       </div>
