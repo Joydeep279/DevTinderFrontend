@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToConnection } from "../utils/connectionSlice";
 import { BASE_URL } from "../utils/constants";
-import ProfileList from "./ProfileList";
+import ConnectionList from "./ConnectionList";
 
 function Connection() {
   const dispatch = useDispatch();
@@ -30,9 +30,9 @@ function Connection() {
           Connections
         </li>
         {connectionList.map((items) => (
-          <ProfileList
+          <ConnectionList
             items={items}
-            options={["Remove", "Block"]}
+            options={["Remove", "Chat"]}
             key={items._id}
           />
         ))}

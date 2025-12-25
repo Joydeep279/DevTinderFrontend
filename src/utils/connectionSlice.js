@@ -10,6 +10,9 @@ const connectionSlice = createSlice({
     removeConnection: (state, action) => {
       return null;
     },
+    getUser:(state,action)=>{
+      
+    }
   },
 });
 export const { addToConnection, removeConnection } = connectionSlice.actions;

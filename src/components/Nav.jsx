@@ -27,7 +27,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-5">
+    <header className="navbar bg-base-100 shadow-sm px-5">
       <div className="flex-1">
         <Link className="btn btn-ghost text-xl" to={"/"}>
           DevTinder
@@ -101,7 +101,7 @@ function Navbar() {
           </Link>
         )}
       </div>
-    </div>
+    </header>
   );
 }
 
