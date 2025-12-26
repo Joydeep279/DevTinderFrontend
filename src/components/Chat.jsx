@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import connectSocket from "../utils/Socket";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -10,33 +10,44 @@ const ChatInterface = () => {
   const { toUserId } = useParams();
   const [sendMsg, setSendMsg] = useState("");
   const dispatch = useDispatch();
+  const socketRef = useRef(null);
 
   const sendSocketMsg = () => {
     if (sendMsg.length === 0) {
       return;
     }
-    const socket = connectSocket();
-    socket.emit("sendMsg", {
-      fromUserName: data.firstName,
-      fromUserId: data._id,
-      toUserId,
-      msg: sendMsg,
-    });
-    setSendMsg("");
+    if (socketRef.current) {
+      socketRef.current.emit("sendMsg", {
+        fromUserName: data.firstName,
+        fromUserId: data._id,
+        toUserId,
+        msg: sendMsg,
+      });
+      setSendMsg("");
+    }
   };
 
   useEffect(() => {
     const socket = connectSocket();
-    socket.emit("joinChat", { fromUserId: data._id, toUserId });
+    socketRef.current = socket;
+
+    socket.on("connect", () => {
+      socket.emit("joinChat", { fromUserId: data._id, toUserId });
+    });
 
     socket.on("RecievedMsg", ({ name, msg }) => {
       dispatch(addChatData({ name, msg }));
     });
 
     return () => {
-      socket.on("leaveChat", () => {});
+      if (socket.connected) {
+        socket.emit("leaveChat", { fromUserId: data._id, toUserId });
+      }
+      socket.off("RecievedMsg");
+      socket.off("connect");
+      socket.disconnect();
     };
-  }, []);
+  }, [toUserId, data._id, dispatch]);
 
   return (
     // Main Card Container
