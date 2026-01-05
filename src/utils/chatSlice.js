@@ -13,8 +13,12 @@ const chatSlice = createSlice({
     addChatData: (state, action) => {
       state.data.unshift(action.payload);
     },
+    clearChatData: (state, action) => {
+      state.data = [];
+    },
   },
 });
 
-export const { addFromUserDetails, addChatData } = chatSlice.actions;
+export const { addFromUserDetails, addChatData, clearChatData } =
+  chatSlice.actions;
 export default chatSlice.reducer;
