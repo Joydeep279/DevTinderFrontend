@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import connectSocket from "../utils/Socket";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,30 +11,35 @@ const ChatInterface = () => {
   const [sendMsg, setSendMsg] = useState("");
   const dispatch = useDispatch();
   const fromUserId = data._id;
+  const socketRef = useRef(null);
 
   useEffect(() => {
     const socket = connectSocket();
-    socket.emit("joinChat", { toUserId, fromUserId });
+    socketRef.current = socket;
+    socketRef.current.emit("joinChat", { toUserId, fromUserId });
 
-    socket.on("roomMsg", (messagePacket) => {
+    socketRef.current.on("roomMsg", (messagePacket) => {
       dispatch(addChatData(messagePacket));
     });
 
     return () => {
-      socket.disconnect();
+      socketRef.current.disconnect();
+      socketRef.current = null;
       dispatch(clearChatData());
     };
-  }, [dispatch]);
+  }, []);
 
   function sendSocketMsg() {
-    const socket = connectSocket();
-    socket.emit("sendMsg", {
-      name: data.firstName,
-      toUserId,
-      fromUserId,
-      sendMsg,
-    });
-    setSendMsg("");
+    if (socketRef.current) {
+      socketRef.current.emit("sendMsg", {
+        name: data.firstName,
+        toUserId,
+        fromUserId,
+        sendMsg,
+      });
+      dispatch(addChatData({ name: data.firstName, sendMsg }));
+      setSendMsg("");
+    }
   }
 
   return (
@@ -56,7 +61,7 @@ const ChatInterface = () => {
       </div>
       <div className="w-full h-[500px] bg-base-200 overflow-y-auto p-4 flex flex-col-reverse gap-2">
         {chatData.data.map((msg, index) => {
-          const isMe = msg.name === data.firstName; // Let's pretend we are Obi-Wan
+          const isMe = msg.name === data.firstName;
           return (
             <div
               key={index}
